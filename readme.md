@@ -1,8 +1,7 @@
 # Custom Theme Nvim (Which is not a theme)
 ## What is custom theme?
-Custom theme plugin is allow you to edit your nvim syntax highlights.
-Basicaly it is a theme generator.
-
+Custom theme is a highlights editor.
+Allows you to edit highlights in a more convenient way.
 ## Why?
 - Let's say your happy with your current theme but function highlights is anoy you.
 - Let's say your happy with your theme but your theme dosen't support some of your plugins.
