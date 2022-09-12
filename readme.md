@@ -10,7 +10,7 @@ Allows you to edit highlights in a more convenient way.
 - Let's say your happy with your theme but your theme dosen't support some of your plugins.
 - You can build a theme as you like from scrach.
 ## Demo
-![Demo](https://github.com/Djancyp/nvim-plugin-demo/blob/main/custom-theme/demo.png)
+![Demo](https://github.com/Djancyp/nvim-plugin-demo/blob/main/custom-theme/demo1.png)
 ## Requirements
 - [plenary](https://github.com/nvim-lua/plenary.nvim)
 #### Optinal
