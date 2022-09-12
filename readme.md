@@ -2,8 +2,11 @@
 ## What is custom theme?
 Custom theme is a highlights editor.
 Allows you to edit highlights in a more convenient way.
+
+## Update
+    Now while you are editing highlights, you can see higlihts on the theme in real time.
 ## Why?
-- Let's say your happy with your current theme but function highlights is anoy you.
+- Let's say your happy with your current theme but function highlights is annoy you.
 - Let's say your happy with your theme but your theme dosen't support some of your plugins.
 - You can build a theme as you like from scrach.
 ## Demo

@@ -2,8 +2,11 @@ local M = {}
 local api = vim.api
 local hl = api.nvim_set_hl
 local Path = require("plenary.path")
+local async = require("plenary.async")
 local path = vim.fn.stdpath('data') .. '/custom-theme.json'
 local backUp_path = vim.fn.stdpath('data') .. '/custom-theme-backup.json'
+local cmd = vim.api.nvim_create_autocmd
+
 M.h_bufnr = nil
 M.highlight_list = {}
 M.backup = {}
@@ -56,6 +59,7 @@ end
 function M.get_theme_highlights()
     local highlights = api.nvim_exec("highlight", true)
     local lines = vim.split(highlights, "\n")
+    -- find highlight groups on current buffer
     for _, line in ipairs(lines) do
         local name = line:match("^(%w+)")
         local fg_color = line:match("guifg=(#[%x]+)")
@@ -70,6 +74,9 @@ function M.get_theme_highlights()
 end
 
 function M.open_theme_color_selector()
+    M.current_buffer = api.nvim_get_current_buf()
+    -- check current buffer highlights
+
     local buf = api.nvim_create_buf(false, false)
     M.h_bufnr = buf
     vim.cmd "vsplit"
@@ -93,6 +100,22 @@ function M.open_theme_color_selector()
     api.nvim_buf_set_option(buf, "buflisted", false)
     api.nvim_buf_set_option(buf, "filetype", "custom_theme")
     M.set_keys()
+
+    -- set cursor move event for highlight buffer
+    local group = api.nvim_create_namespace("CustomTheme")
+    vim.api.nvim_clear_autocmds { group = group, buffer = buf }
+
+    cmd({ "CursorMoved" }, {
+        buffer = buf,
+        group = group,
+        callback = function()
+            M.set_theme_highlights(path)
+            local line = api.nvim_win_get_cursor(0)[1]
+            local name = api.nvim_buf_get_lines(buf, line - 1, line, false)[1]:match("^(%w+)")
+            vim.cmd(string.format("hi %s guifg=#FFFFFF guibg=#ff5454", name))
+        end,
+    })
+
 end
 
 function M.set_keys()
